@@ -62,8 +62,6 @@ public class ClipFXController implements Initializable {
     @FXML
     private MenuItem aboutMenu;
     @FXML
-    private TitledPane x1;
-    @FXML
     private ComboBox<TrimSize> sizeBox;
     @FXML
     private CheckBox ratioBox;
@@ -74,13 +72,15 @@ public class ClipFXController implements Initializable {
 
     private FileChooser fileChooser = new FileChooser();
     @FXML
-    private TitledPane x2;
-    @FXML
     private MenuItem trimMenu;
     @FXML
     private MenuItem rotateMenu;
     @FXML
     private AnchorPane canvas;
+    @FXML
+    private TitledPane trimPanel;
+    @FXML
+    private TitledPane rotatePanel;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -158,10 +158,12 @@ public class ClipFXController implements Initializable {
 
     @FXML
     private void onTrimView(ActionEvent event) {
+        trimPanel.expandedProperty().set(true);
     }
 
     @FXML
     private void onRotateView(ActionEvent event) {
+        rotatePanel.expandedProperty().set(true);
     }
 
     @FXML

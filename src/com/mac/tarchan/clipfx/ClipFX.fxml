@@ -100,7 +100,7 @@
       <items>
         <Accordion maxWidth="-Infinity" prefWidth="200.0">
           <expandedPane>
-            <TitledPane fx:id="x2" animated="false" text="トリミング">
+            <TitledPane fx:id="trimPanel" animated="false" collapsible="true" text="トリミング">
               <content>
                 <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
@@ -135,8 +135,8 @@
             </TitledPane>
           </expandedPane>
           <panes>
-            <fx:reference source="x2" />
-            <TitledPane fx:id="x1" animated="false" text="回転">
+            <fx:reference source="trimPanel" />
+            <TitledPane id="x1" fx:id="rotatePanel" animated="false" text="回転">
               <content>
                 <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
