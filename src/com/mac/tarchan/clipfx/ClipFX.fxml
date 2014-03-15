@@ -2,13 +2,155 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mac.tarchan.clipfx.ClipFXController">
-    <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
-    </children>
-</AnchorPane>
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mac.tarchan.clipfx.ClipFXController">
+  <children>
+    <MenuBar useSystemMenuBar="true" VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="ファイル">
+          <items>
+            <MenuItem id="" mnemonicParsing="false" text="クリップボードから新規作成" fx:id="newMenu">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="N" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+            <MenuItem id="" mnemonicParsing="false" text="開く…" fx:id="openMenu">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="O" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+            <Menu id="" mnemonicParsing="false" text="最近使った項目を開く" fx:id="recentMenu" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem id="" mnemonicParsing="false" text="ウインドウを閉じる" fx:id="closeMenu">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="W" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+            <MenuItem id="" mnemonicParsing="false" text="保存" fx:id="saveMenu">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="S" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+            <MenuItem id="" mnemonicParsing="false" text="別名で保存…" fx:id="saveAsMenu">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="S" control="UP" meta="DOWN" shift="DOWN" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+            <MenuItem id="" mnemonicParsing="false" text="元に戻す" fx:id="revertMenu">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="R" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem id="" mnemonicParsing="false" text="環境設定…" fx:id="optionMenu">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="COMMA" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem id="" mnemonicParsing="false" text="ClipFX を終了" fx:id="quitMenu">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="Q" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="編集">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="ヘルプ">
+          <items>
+            <MenuItem id="" mnemonicParsing="false" text="ClipFX について" fx:id="aboutMenu" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <SplitPane dividerPositions="0.32601880877742945" focusTraversable="true" prefHeight="160.0" prefWidth="200.0" visible="true" VBox.vgrow="ALWAYS">
+      <items>
+        <Accordion maxWidth="-Infinity" prefWidth="200.0">
+          <expandedPane>
+            <TitledPane fx:id="x1" animated="false" text="回転">
+              <content>
+                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                    <GridPane prefHeight="160.0" prefWidth="201.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <children>
+                        <Button mnemonicParsing="false" text="反時計回りに回転" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" text="時計回りに回転" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" text="水平方向に反転" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" text="垂直方向に反転" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                      </children>
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      </columnConstraints>
+                      <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      </rowConstraints>
+                    </GridPane>
+                  </children>
+                </AnchorPane>
+              </content>
+            </TitledPane>
+          </expandedPane>
+          <panes>
+            <TitledPane animated="false" text="トリミング">
+              <content>
+                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                    <GridPane alignment="TOP_LEFT" prefHeight="160.0" prefWidth="201.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <children>
+                        <ComboBox fx:id="sizeBox" onAction="#onSize" promptText="サイズ" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                          <items>
+                            <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="アイテム1" />
+                              <String fx:value="アイテム2" />
+                              <String fx:value="アイテム3" />
+                            </FXCollections>
+                          </items>
+                        </ComboBox>
+                        <CheckBox fx:id="ratioBox" mnemonicParsing="false" onAction="#onRatio" text="縦横比を固定" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="switchButton" mnemonicParsing="false" onAction="#onSwitch" text="高さと幅を入れ替え" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Button fx:id="trimButton" mnemonicParsing="false" onAction="#onTrim" text="切り取り" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                      </children>
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      </columnConstraints>
+                      <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      </rowConstraints>
+                    </GridPane>
+                  </children>
+                </AnchorPane>
+              </content>
+            </TitledPane>
+            <fx:reference source="x1" />
+          </panes>
+        </Accordion>
+        <AnchorPane id="canvas" minHeight="0.0" minWidth="50.0" prefHeight="160.0" prefWidth="100.0" />
+      </items>
+    </SplitPane>
+  </children>
+</VBox>
