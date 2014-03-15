@@ -15,6 +15,7 @@
  */
 package com.mac.tarchan.clipfx;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
@@ -27,6 +28,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
 /**
  * ClipFXController
@@ -35,6 +39,8 @@ import javafx.scene.control.TitledPane;
  */
 public class ClipFXController implements Initializable {
 
+    @FXML
+    private VBox form;
     @FXML
     private MenuItem newMenu;
     @FXML
@@ -66,11 +72,26 @@ public class ClipFXController implements Initializable {
     @FXML
     private Button trimButton;
 
+    private FileChooser fileChooser = new FileChooser();
+    @FXML
+    private TitledPane x2;
+    @FXML
+    private MenuItem trimMenu;
+    @FXML
+    private MenuItem rotateMenu;
+    @FXML
+    private AnchorPane canvas;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ObservableList<TrimSize> sizeList = sizeBox.getItems();
         sizeList.clear();
         sizeList.add(new TrimSize("艦これ", 800, 480));
+        
+        // ファイル名フィルタ
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG ファイル (*.png)", "*.png"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPEG ファイル (*.jpg)", "*.jpg", "*.jpeg"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("すべてのファイル (*.*)", "*.*"));
     }
 
     @FXML
@@ -87,6 +108,64 @@ public class ClipFXController implements Initializable {
 
     @FXML
     private void onTrim(ActionEvent event) {
+    }
+
+    @FXML
+    private void onNewFile(ActionEvent event) {
+    }
+
+    @FXML
+    private void onOpenFile(ActionEvent event) {
+        File file = fileChooser.showOpenDialog(form.getScene().getWindow());
+        if (file == null) {
+            return;
+        }
+        if (!file.exists()) {
+            throw new RuntimeException("ファイルが見つかりません。: " + file);
+        }
+    }
+
+    @FXML
+    private void onCloseFile(ActionEvent event) {
+    }
+
+    @FXML
+    private void onSaveFile(ActionEvent event) {
+        // TODO ファイル名が確定している場合は、そのまま保存
+        onSaveAsFile(event);
+    }
+
+    @FXML
+    private void onSaveAsFile(ActionEvent event) {
+        File file = fileChooser.showSaveDialog(form.getScene().getWindow());
+        if (file == null) {
+            return;
+        }
+        // TODO ファイルを保存
+    }
+
+    @FXML
+    private void onRevertFile(ActionEvent event) {
+    }
+
+    @FXML
+    private void onShowOption(ActionEvent event) {
+    }
+
+    @FXML
+    private void onQuit(ActionEvent event) {
+    }
+
+    @FXML
+    private void onTrimView(ActionEvent event) {
+    }
+
+    @FXML
+    private void onRotateView(ActionEvent event) {
+    }
+
+    @FXML
+    private void onAbout(ActionEvent event) {
     }
 
 }
