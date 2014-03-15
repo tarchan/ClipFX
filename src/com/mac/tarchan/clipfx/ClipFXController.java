@@ -16,8 +16,12 @@
 package com.mac.tarchan.clipfx;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +31,12 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -76,11 +85,17 @@ public class ClipFXController implements Initializable {
     @FXML
     private MenuItem rotateMenu;
     @FXML
-    private AnchorPane canvas;
+    private ImageView canvas;
     @FXML
     private TitledPane trimPanel;
     @FXML
     private TitledPane rotatePanel;
+    @FXML
+    private ScrollPane scrollPanel;
+    @FXML
+    private Slider rotateSlider;
+    @FXML
+    private TextField rotateField;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -92,6 +107,10 @@ public class ClipFXController implements Initializable {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG ファイル (*.png)", "*.png"));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPEG ファイル (*.jpg)", "*.jpg", "*.jpeg"));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("すべてのファイル (*.*)", "*.*"));
+        
+        // 回転
+        rotateField.textProperty().bind(rotateSlider.valueProperty().asString());
+        canvas.rotateProperty().bind(rotateSlider.valueProperty());
     }
 
     @FXML
@@ -122,6 +141,14 @@ public class ClipFXController implements Initializable {
         }
         if (!file.exists()) {
             throw new RuntimeException("ファイルが見つかりません。: " + file);
+        }
+        try {
+            Image image = new Image(file.toURI().toURL().toString());
+            canvas.setImage(image);
+            canvas.setFitWidth(image.getWidth());
+            canvas.setFitHeight(image.getHeight());
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ClipFXController.class.getName()).log(Level.SEVERE, "イメージを開けません。: " + file, ex);
         }
     }
 
@@ -154,6 +181,7 @@ public class ClipFXController implements Initializable {
 
     @FXML
     private void onQuit(ActionEvent event) {
+        Platform.exit();
     }
 
     @FXML
