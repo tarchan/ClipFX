@@ -29,7 +29,7 @@ public class TrimSize {
     public IntegerProperty width = new SimpleIntegerProperty();
     public IntegerProperty height = new SimpleIntegerProperty();
     
-    public TrimSize(String name, int width, int height) {
+    public TrimSize(int width, int height, String name) {
         this.name.set(name);
         this.width.set(width);
         this.height.set(height);

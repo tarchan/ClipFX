@@ -37,7 +37,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
@@ -101,7 +100,8 @@ public class ClipFXController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ObservableList<TrimSize> sizeList = sizeBox.getItems();
         sizeList.clear();
-        sizeList.add(new TrimSize("艦これ", 800, 480));
+        sizeList.add(new TrimSize(800, 480, "艦これ"));
+        sizeList.add(new TrimSize(500, 500, "正方形"));
         
         // ファイル名フィルタ
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG ファイル (*.png)", "*.png"));
