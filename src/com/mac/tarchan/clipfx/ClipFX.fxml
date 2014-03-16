@@ -168,9 +168,9 @@
           <children>
             <ScrollPane fx:id="scrollPanel" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="TOP_LEFT">
               <content>
-                <Group id="Group" fx:id="root">
+                <Group id="Group" fx:id="group">
                   <children>
-                    <ImageView fx:id="canvas" fitHeight="200.0" fitWidth="200.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" />
+                    <ImageView fx:id="canvas" fitHeight="200.0" fitWidth="200.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" smooth="false" />
                   </children>
                 </Group>
               </content>

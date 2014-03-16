@@ -54,6 +54,7 @@ import javafx.stage.FileChooser;
  */
 public class ClipFXController implements Initializable {
 
+    private FileChooser fileChooser = new FileChooser();
     @FXML
     private VBox form;
     @FXML
@@ -101,8 +102,9 @@ public class ClipFXController implements Initializable {
     @FXML
     private TextField rotateField;
     @FXML
-    private Group root;
-    private FileChooser fileChooser = new FileChooser();
+    private Insets x1;
+    @FXML
+    private Group group;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -128,7 +130,7 @@ public class ClipFXController implements Initializable {
         rect.setStrokeWidth(5.0);
         rect.setStroke(Color.BLACK);
         rect.setFill(Color.TRANSPARENT);
-        root.getChildren().add(rect);
+        group.getChildren().add(rect);
     }
 
     @FXML
