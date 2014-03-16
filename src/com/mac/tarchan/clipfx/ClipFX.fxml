@@ -4,6 +4,7 @@
 <?import java.util.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.input.*?>
@@ -106,9 +107,9 @@
               <content>
                 <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                    <GridPane alignment="TOP_LEFT" prefHeight="160.0" prefWidth="201.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <VBox prefHeight="526.0" prefWidth="201.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <ComboBox fx:id="sizeBox" onAction="#onSize" promptText="サイズ" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                        <ComboBox fx:id="sizeBox" onAction="#onSize" promptText="サイズ">
                           <items>
                             <FXCollections fx:factory="observableArrayList">
                               <String fx:value="アイテム1" />
@@ -116,24 +117,15 @@
                               <String fx:value="アイテム3" />
                             </FXCollections>
                           </items>
-                          <GridPane.margin>
-                            <Insets left="20.0" fx:id="x1" />
-                          </GridPane.margin>
+                          <VBox.margin>
+                            <Insets left="20.0" top="20.0" fx:id="x1" />
+                          </VBox.margin>
                         </ComboBox>
-                        <CheckBox fx:id="ratioBox" mnemonicParsing="false" onAction="#onRatio" text="縦横比を固定" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.margin="$x1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Button fx:id="switchButton" mnemonicParsing="false" onAction="#onSwitch" text="高さと幅を入れ替え" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.margin="$x1" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                        <Button fx:id="trimButton" mnemonicParsing="false" onAction="#onTrim" text="切り取り" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.margin="$x1" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                        <CheckBox fx:id="ratioBox" mnemonicParsing="false" onAction="#onRatio" text="縦横比を固定" VBox.margin="$x1" />
+                        <Button fx:id="switchButton" mnemonicParsing="false" onAction="#onSwitch" text="高さと幅を入れ替え" VBox.margin="$x1" />
+                        <Button fx:id="trimButton" mnemonicParsing="false" onAction="#onTrim" text="切り取り" VBox.margin="$x1" />
                       </children>
-                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      </columnConstraints>
-                      <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      </rowConstraints>
-                    </GridPane>
+                    </VBox>
                   </children>
                 </AnchorPane>
               </content>
@@ -145,13 +137,13 @@
               <content>
                 <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                    <GridPane prefHeight="200.0" prefWidth="201.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <VBox prefHeight="526.0" prefWidth="201.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <Button mnemonicParsing="false" text="反時計回りに回転" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.margin="$x1" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                        <Button mnemonicParsing="false" text="時計回りに回転" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.margin="$x1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Button mnemonicParsing="false" text="水平方向に反転" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.margin="$x1" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                        <Button mnemonicParsing="false" text="垂直方向に反転" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.margin="$x1" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                        <Button mnemonicParsing="false" text="反時計回りに回転" VBox.margin="$x1" VBox.vgrow="NEVER" />
+                        <Button mnemonicParsing="false" text="時計回りに回転" VBox.margin="$x1" VBox.vgrow="NEVER" />
+                        <Button mnemonicParsing="false" text="水平方向に反転" VBox.margin="$x1" VBox.vgrow="NEVER" />
+                        <Button mnemonicParsing="false" text="垂直方向に反転" VBox.margin="$x1" VBox.vgrow="NEVER" />
+                        <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="NEVER">
                           <children>
                             <Slider fx:id="rotateSlider" max="360.0" showTickLabels="false" showTickMarks="false" HBox.hgrow="ALWAYS">
                               <HBox.margin>
@@ -161,24 +153,11 @@
                             <TextField fx:id="rotateField" prefWidth="50.0" promptText="角度" text="" HBox.hgrow="NEVER" />
                           </children>
                           <padding>
-                            <Insets left="10.0" right="10.0" top="10.0" />
+                            <Insets left="10.0" right="10.0" top="20.0" />
                           </padding>
                         </HBox>
                       </children>
-                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      </columnConstraints>
-                      <padding>
-                        <Insets />
-                      </padding>
-                      <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      </rowConstraints>
-                    </GridPane>
+                    </VBox>
                   </children>
                 </AnchorPane>
               </content>
@@ -189,7 +168,11 @@
           <children>
             <ScrollPane fx:id="scrollPanel" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="TOP_LEFT">
               <content>
-                <ImageView fx:id="canvas" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                <Group id="Group" fx:id="root">
+                  <children>
+                    <ImageView fx:id="canvas" fitHeight="200.0" fitWidth="200.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+                </Group>
               </content>
             </ScrollPane>
           </children>

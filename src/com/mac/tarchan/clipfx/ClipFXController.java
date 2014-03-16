@@ -15,6 +15,7 @@
  */
 package com.mac.tarchan.clipfx;
 
+import java.awt.Transparency;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -26,6 +27,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -40,6 +42,8 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 
@@ -80,8 +84,6 @@ public class ClipFXController implements Initializable {
     private Button switchButton;
     @FXML
     private Button trimButton;
-
-    private FileChooser fileChooser = new FileChooser();
     @FXML
     private MenuItem trimMenu;
     @FXML
@@ -98,6 +100,9 @@ public class ClipFXController implements Initializable {
     private Slider rotateSlider;
     @FXML
     private TextField rotateField;
+    @FXML
+    private Group root;
+    private FileChooser fileChooser = new FileChooser();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -119,14 +124,11 @@ public class ClipFXController implements Initializable {
     @FXML
     private void onSize(ActionEvent event) {
         TrimSize item = sizeBox.getSelectionModel().getSelectedItem();
-        Image image = canvas.getImage();
         Rectangle rect = new Rectangle(item.width.get(), item.height.get());
-//        rect.strokeProperty().set(null);
-        Group root = new Group();
+        rect.setStrokeWidth(5.0);
+        rect.setStroke(Color.BLACK);
+        rect.setFill(Color.TRANSPARENT);
         root.getChildren().add(rect);
-        canvas.getParent().getChildrenUnmodifiable().add(root);
-//        form.getScene().getWindow().
-//        GraphicsContext context = canvas.getGraphicsContext2D();
     }
 
     @FXML
