@@ -1,3 +1,9 @@
 /build/
 /dist/
 *.bak
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
