@@ -23,9 +23,14 @@
                 <KeyCodeCombination alt="UP" code="N" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
               </accelerator>
             </MenuItem>
-            <MenuItem id="" mnemonicParsing="false" onAction="#onOpenFile" text="開く…" fx:id="openMenu">
+            <MenuItem id="" mnemonicParsing="false" onAction="#onOpenFile" text="ファイルを開く…" fx:id="openFileMenu">
               <accelerator>
                 <KeyCodeCombination alt="UP" code="O" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#onOpenUrl" text="URLを開く..." fx:id="openUrlMenu">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="L" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
               </accelerator>
             </MenuItem>
             <Menu id="" mnemonicParsing="false" text="最近使った項目を開く" fx:id="recentMenu" />

@@ -60,8 +60,6 @@ public class ClipFXController implements Initializable {
     @FXML
     private MenuItem newMenu;
     @FXML
-    private MenuItem openMenu;
-    @FXML
     private Menu recentMenu;
     @FXML
     private MenuItem closeMenu;
@@ -105,6 +103,10 @@ public class ClipFXController implements Initializable {
     private Insets x1;
     @FXML
     private Group group;
+    @FXML
+    private MenuItem openFileMenu;
+    @FXML
+    private MenuItem openUrlMenu;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -212,6 +214,10 @@ public class ClipFXController implements Initializable {
 
     @FXML
     private void onAbout(ActionEvent event) {
+    }
+
+    @FXML
+    private void onOpenUrl(ActionEvent event) {
     }
 
 }
