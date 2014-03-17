@@ -75,8 +75,16 @@
             <MenuItem mnemonicParsing="false" text="Redo" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" onAction="#onCopy" text="コピー">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="C" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#onPaste" text="貼り付け">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="V" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
             <MenuItem mnemonicParsing="false" text="Delete" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Select All" />
@@ -104,7 +112,7 @@
         </Menu>
       </menus>
     </MenuBar>
-    <SplitPane dividerPositions="0.17362270450751252" focusTraversable="true" prefHeight="160.0" prefWidth="200.0" visible="true" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.17278797996661102" focusTraversable="true" prefHeight="160.0" prefWidth="200.0" visible="true" VBox.vgrow="ALWAYS">
       <items>
         <Accordion maxWidth="-Infinity" prefWidth="200.0">
           <expandedPane>

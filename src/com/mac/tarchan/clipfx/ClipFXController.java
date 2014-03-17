@@ -42,6 +42,8 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import static javafx.scene.input.DataFormat.IMAGE;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -55,6 +57,7 @@ import javafx.stage.FileChooser;
  */
 public class ClipFXController implements Initializable {
 
+    private Clipboard clipboard = Clipboard.getSystemClipboard();
     private FileChooser fileChooser = new FileChooser();
     @FXML
     private VBox form;
@@ -150,7 +153,6 @@ public class ClipFXController implements Initializable {
 
     @FXML
     private void onNewFile(ActionEvent event) {
-        Clipboard clipboard = Clipboard.getSystemClipboard();
         Image image = clipboard.getImage();
         setImage(image);
     }
@@ -229,6 +231,23 @@ public class ClipFXController implements Initializable {
 
     @FXML
     private void onOpenUrl(ActionEvent event) {
+    }
+
+    @FXML
+    private void onCopy(ActionEvent event) {
+        Image image = canvas.getImage();
+        if (image == null) {
+            return;
+        }
+        ClipboardContent content = new ClipboardContent();
+        content.putImage(image);
+        clipboard.setContent(content);
+    }
+
+    @FXML
+    private void onPaste(ActionEvent event) {
+        Image image = clipboard.getImage();
+        setImage(image);
     }
 
 }
