@@ -15,21 +15,27 @@
  */
 package com.mac.tarchan.clipfx;
 
-import java.awt.Transparency;
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -43,12 +49,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import static javafx.scene.input.DataFormat.IMAGE;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javax.swing.event.DocumentEvent;
 
 /**
  * ClipFXController
@@ -59,6 +67,8 @@ public class ClipFXController implements Initializable {
 
     private Clipboard clipboard = Clipboard.getSystemClipboard();
     private FileChooser fileChooser = new FileChooser();
+    private AnchorPane urlBox;
+    private URLBoxController urlBoxController;
     @FXML
     private VBox form;
     @FXML
@@ -127,6 +137,22 @@ public class ClipFXController implements Initializable {
         // 回転
         rotateField.textProperty().bind(rotateSlider.valueProperty().asString());
         canvas.rotateProperty().bind(rotateSlider.valueProperty());
+        
+        // URLダイアログ
+        try {
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("URLBox.fxml"));
+            fxml.load();
+            urlBox = fxml.getRoot();
+            urlBoxController = fxml.getController();
+            urlBoxController.urlProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> ov, String oldValue, String newValue) {
+                    setImageURL(newValue);
+                }
+            });
+        } catch (IOException ex) {
+            Logger.getLogger(ClipFXController.class.getName()).log(Level.SEVERE, "ダイアログをロードできません。: URLBox.fxml", ex);
+        }
     }
 
     @FXML
@@ -164,6 +190,12 @@ public class ClipFXController implements Initializable {
         canvas.setImage(image);
         canvas.setFitWidth(image.getWidth());
         canvas.setFitHeight(image.getHeight());
+        scrollPanel.requestLayout();
+    }
+
+    private void setImageURL(String url) {
+        Image image = new Image(url);
+        setImage(image);
     }
 
     @FXML
@@ -176,8 +208,7 @@ public class ClipFXController implements Initializable {
             throw new RuntimeException("ファイルが見つかりません。: " + file);
         }
         try {
-            Image image = new Image(file.toURI().toURL().toString());
-            setImage(image);
+            setImageURL(file.toURI().toURL().toString());
         } catch (MalformedURLException ex) {
             Logger.getLogger(ClipFXController.class.getName()).log(Level.SEVERE, "イメージを開けません。: " + file, ex);
         }
@@ -231,6 +262,17 @@ public class ClipFXController implements Initializable {
 
     @FXML
     private void onOpenUrl(ActionEvent event) {
+        Scene scene = urlBox.getScene();
+        if (scene == null) {
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(form.getScene().getWindow());
+            stage.setScene(new Scene(urlBox));
+            stage.show();
+        } else {
+            Stage stage = (Stage) scene.getWindow();
+            stage.show();
+        }
     }
 
     @FXML

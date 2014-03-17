@@ -18,11 +18,17 @@ package com.mac.tarchan.clipfx;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -30,6 +36,10 @@ import javafx.scene.control.TextField;
  * @author Takashi Ogura <tarchan at gmail.com>
  */
 public class URLBoxController implements Initializable {
+    private StringProperty url = new SimpleStringProperty();
+    private BooleanProperty visible = new SimpleBooleanProperty();
+    @FXML
+    private AnchorPane root;
     @FXML
     private TextField urlField;
     @FXML
@@ -45,12 +55,29 @@ public class URLBoxController implements Initializable {
         // TODO
     }    
 
+    public StringProperty urlProperty() {
+        return url;
+    }
+
+    public BooleanProperty visibleProperty() {
+        return visible;
+    }
+
     @FXML
     private void onUrlCancel(ActionEvent event) {
+        visible.set(false);
+        hide();
     }
 
     @FXML
     private void onUrlOpen(ActionEvent event) {
+        url.set(urlField.getText());
+        visible.set(false);
+        hide();
     }
     
+    private void hide() {
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.hide();
+    }
 }
