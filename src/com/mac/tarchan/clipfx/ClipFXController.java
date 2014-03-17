@@ -41,6 +41,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -149,6 +150,18 @@ public class ClipFXController implements Initializable {
 
     @FXML
     private void onNewFile(ActionEvent event) {
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        Image image = clipboard.getImage();
+        setImage(image);
+    }
+
+    private void setImage(Image image) {
+        if (image == null) {
+            return;
+        }
+        canvas.setImage(image);
+        canvas.setFitWidth(image.getWidth());
+        canvas.setFitHeight(image.getHeight());
     }
 
     @FXML
@@ -162,9 +175,7 @@ public class ClipFXController implements Initializable {
         }
         try {
             Image image = new Image(file.toURI().toURL().toString());
-            canvas.setImage(image);
-            canvas.setFitWidth(image.getWidth());
-            canvas.setFitHeight(image.getHeight());
+            setImage(image);
         } catch (MalformedURLException ex) {
             Logger.getLogger(ClipFXController.class.getName()).log(Level.SEVERE, "イメージを開けません。: " + file, ex);
         }
