@@ -23,8 +23,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -34,7 +32,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -56,7 +53,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javax.swing.event.DocumentEvent;
 
 /**
  * ClipFXController
@@ -131,7 +127,7 @@ public class ClipFXController implements Initializable {
         
         // ファイル名フィルタ
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG ファイル (*.png)", "*.png"));
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPEG ファイル (*.jpg)", "*.jpg", "*.jpeg"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPEG ファイル (*.jpg;*.jpeg)", "*.jpg", "*.jpeg"));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("すべてのファイル (*.*)", "*.*"));
         
         // 回転
@@ -268,6 +264,7 @@ public class ClipFXController implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(form.getScene().getWindow());
             stage.setScene(new Scene(urlBox));
+            stage.setTitle("URLを開く");
             stage.show();
         } else {
             Stage stage = (Stage) scene.getWindow();

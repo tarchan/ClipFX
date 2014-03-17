@@ -71,7 +71,9 @@ public class URLBoxController implements Initializable {
 
     @FXML
     private void onUrlOpen(ActionEvent event) {
-        url.set(urlField.getText());
+        if (!urlField.getText().isEmpty()) {
+            url.set(urlField.getText());
+        }
         visible.set(false);
         hide();
     }
