@@ -32,6 +32,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -47,7 +48,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
@@ -66,7 +66,7 @@ public class ClipFXController implements Initializable {
     private AnchorPane urlBox;
     private URLBoxController urlBoxController;
     @FXML
-    private VBox form;
+    private Parent root;
     @FXML
     private MenuItem newMenu;
     @FXML
@@ -196,7 +196,7 @@ public class ClipFXController implements Initializable {
 
     @FXML
     private void onOpenFile(ActionEvent event) {
-        File file = fileChooser.showOpenDialog(form.getScene().getWindow());
+        File file = fileChooser.showOpenDialog(root.getScene().getWindow());
         if (file == null) {
             return;
         }
@@ -222,7 +222,7 @@ public class ClipFXController implements Initializable {
 
     @FXML
     private void onSaveAsFile(ActionEvent event) {
-        File file = fileChooser.showSaveDialog(form.getScene().getWindow());
+        File file = fileChooser.showSaveDialog(root.getScene().getWindow());
         if (file == null) {
             return;
         }
@@ -262,7 +262,7 @@ public class ClipFXController implements Initializable {
         if (scene == null) {
             Stage stage = new Stage();
             stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(form.getScene().getWindow());
+            stage.initOwner(root.getScene().getWindow());
             stage.setScene(new Scene(urlBox));
             stage.setTitle("URLを開く");
             stage.show();

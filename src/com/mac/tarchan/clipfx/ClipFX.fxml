@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox id="root" fx:id="form" prefHeight="600.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mac.tarchan.clipfx.ClipFXController">
+<VBox fx:id="root" prefHeight="600.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mac.tarchan.clipfx.ClipFXController">
   <children>
     <MenuBar useSystemMenuBar="true" VBox.vgrow="NEVER">
       <menus>
