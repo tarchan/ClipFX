@@ -28,7 +28,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -79,7 +78,6 @@ public class URLBoxController implements Initializable {
     }
     
     private void hide() {
-        Stage stage = (Stage) root.getScene().getWindow();
-        stage.hide();
+        root.getScene().getWindow().hide();
     }
 }

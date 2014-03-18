@@ -17,6 +17,8 @@ package com.mac.tarchan.clipfx;
 
 import java.io.IOException;
 import java.net.URL;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -43,6 +45,12 @@ public class FlowManager {
             Object data = owner.getUserData();
             root.setUserData(data);
             Stage stage = gotoPage(root, owner);
+            stage.showingProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue ov, Boolean t, Boolean t1) {
+                    System.out.println("ウインドウを閉じる" + t1);
+                }
+            });
 //            stage.setTitle(name);
             return fxml.getController();
         } catch (IOException ex) {
