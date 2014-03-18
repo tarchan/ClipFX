@@ -15,6 +15,7 @@
  */
 package com.mac.tarchan.clipfx;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -26,6 +27,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,6 +55,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 
 /**
  * ClipFXController
@@ -61,8 +64,9 @@ import javafx.stage.Stage;
  */
 public class ClipFXController implements Initializable {
 
-    private Clipboard clipboard = Clipboard.getSystemClipboard();
-    private FileChooser fileChooser = new FileChooser();
+    private final Clipboard clipboard = Clipboard.getSystemClipboard();
+    private final FileChooser fileChooser = new FileChooser();
+    private File savedFile;
     private AnchorPane urlBox;
     private URLBoxController urlBoxController;
     @FXML
@@ -126,9 +130,8 @@ public class ClipFXController implements Initializable {
         sizeList.add(new TrimSize(500, 500, "正方形"));
         
         // ファイル名フィルタ
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG ファイル (*.png)", "*.png"));
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPEG ファイル (*.jpg;*.jpeg)", "*.jpg", "*.jpeg"));
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("すべてのファイル (*.*)", "*.*"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("イメージファイル", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("すべてのファイル", "*.*"));
         
         // 回転
         rotateField.textProperty().bind(rotateSlider.valueProperty().asString());
@@ -216,17 +219,35 @@ public class ClipFXController implements Initializable {
 
     @FXML
     private void onSaveFile(ActionEvent event) {
-        // TODO ファイル名が確定している場合は、そのまま保存
-        onSaveAsFile(event);
+        // ファイル名が確定している場合は、そのまま保存
+        saveFile(savedFile);
     }
 
     @FXML
     private void onSaveAsFile(ActionEvent event) {
-        File file = fileChooser.showSaveDialog(root.getScene().getWindow());
+        // 常にファイル名を選択
+        saveFile(null);
+    }
+
+    private void saveFile(File file) {
         if (file == null) {
-            return;
+            file = fileChooser.showSaveDialog(root.getScene().getWindow());
+            if (file == null) {
+                // キャンセル
+                return;
+            }
         }
-        // TODO ファイルを保存
+        try {
+            saveImage(canvas.getImage(), file);
+            savedFile = file;
+        } catch (IOException ex) {
+            Logger.getLogger(ClipFXController.class.getName()).log(Level.SEVERE, "イメージを保存できません。: " + file, ex);
+        }
+    }
+    
+    private void saveImage(Image image, File file) throws IOException {
+        BufferedImage saveImage = SwingFXUtils.fromFXImage(image, null);
+        ImageIO.write(saveImage, "png", file);
     }
 
     @FXML
@@ -239,6 +260,7 @@ public class ClipFXController implements Initializable {
 
     @FXML
     private void onQuit(ActionEvent event) {
+        // TODO 編集済みのイメージが保存済みかどうか確認
         Platform.exit();
     }
 
