@@ -69,6 +69,7 @@ public class ClipFXController implements Initializable {
     private File savedFile;
     private AnchorPane urlBox;
     private URLBoxController urlBoxController;
+    private FlowManager flow = new FlowManager(ClipFXController.class);
     @FXML
     private Parent root;
     @FXML
@@ -280,18 +281,26 @@ public class ClipFXController implements Initializable {
 
     @FXML
     private void onOpenUrl(ActionEvent event) {
-        Scene scene = urlBox.getScene();
-        if (scene == null) {
-            Stage stage = new Stage();
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(root.getScene().getWindow());
-            stage.setScene(new Scene(urlBox));
-            stage.setTitle("URLを開く");
-            stage.show();
-        } else {
-            Stage stage = (Stage) scene.getWindow();
-            stage.show();
-        }
+        ((Stage)root.getScene().getWindow()).setTitle("画面遷移テスト");
+        URLBoxController c = flow.loadAndGoto("URLBox", root);
+        c.urlProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String oldValue, String newValue) {
+                
+            }
+        });
+//        Scene scene = urlBox.getScene();
+//        if (scene == null) {
+//            Stage stage = new Stage();
+//            stage.initModality(Modality.WINDOW_MODAL);
+//            stage.initOwner(root.getScene().getWindow());
+//            stage.setScene(new Scene(urlBox));
+//            stage.setTitle("URLを開く");
+//            stage.show();
+//        } else {
+//            Stage stage = (Stage) scene.getWindow();
+//            stage.show();
+//        }
     }
 
     @FXML
