@@ -40,15 +40,16 @@ public class FlowManager {
 
     public <C extends Object> C loadAndGoto(String name, final Parent owner) {
         try {
-            FXMLLoader fxml = load(name);
+            FXMLLoader fxml = loadFXML(name);
             Parent root = fxml.getRoot();
             Object data = owner.getUserData();
             root.setUserData(data);
             Stage stage = gotoPage(root, owner);
             stage.showingProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
-                public void changed(ObservableValue ov, Boolean t, Boolean t1) {
-                    System.out.println("ウインドウを閉じる: " + t1);
+                public void changed(ObservableValue ov, Boolean oldValue, Boolean newValue) {
+                    System.out.println("ウインドウを閉じる: " + newValue);
+                    // 元のページに戻る
                     gotoPage(owner, owner);
                 }
             });
@@ -59,7 +60,7 @@ public class FlowManager {
         }
     }
 
-    public FXMLLoader load(String name) throws IOException {
+    public FXMLLoader loadFXML(String name) throws IOException {
         URL rsrc = null;
         try {
             rsrc = baseClass.getResource(name + ".fxml");
