@@ -18,6 +18,8 @@ package com.mac.tarchan.clipfx;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -28,15 +30,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * FXML Controller class
+ * URLBoxController
  *
  * @author Takashi Ogura <tarchan at gmail.com>
  */
 public class URLBoxController implements Initializable {
+    private Logger log = Logger.getLogger(URLBoxController.class.getName());
     private StringProperty url = new SimpleStringProperty();
-    private BooleanProperty visible = new SimpleBooleanProperty();
     @FXML
     private AnchorPane root;
     @FXML
@@ -51,20 +55,15 @@ public class URLBoxController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        log.log(Level.INFO, "URL={0}, ResourceBundle={1}", new Object[] {url, rb});
     }    
 
     public StringProperty urlProperty() {
         return url;
     }
 
-    public BooleanProperty visibleProperty() {
-        return visible;
-    }
-
     @FXML
     private void onUrlCancel(ActionEvent event) {
-        visible.set(false);
         hide();
     }
 
@@ -73,10 +72,9 @@ public class URLBoxController implements Initializable {
         if (!urlField.getText().isEmpty()) {
             url.set(urlField.getText());
         }
-        visible.set(false);
         hide();
     }
-    
+
     private void hide() {
         root.getScene().getWindow().hide();
     }

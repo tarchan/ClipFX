@@ -216,6 +216,7 @@ public class ClipFXController implements Initializable {
 
     @FXML
     private void onCloseFile(ActionEvent event) {
+        root.getScene().getWindow().hide();
     }
 
     @FXML

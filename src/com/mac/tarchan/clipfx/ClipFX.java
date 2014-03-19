@@ -45,6 +45,7 @@ public class ClipFX extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.setProperty("java.util.logging.SimpleFormatter.format", "%1$tT %2$s %4$s: %5$s%6$s%n");
         launch(args);
     }
     
