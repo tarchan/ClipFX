@@ -38,7 +38,7 @@ public class FlowManager {
         this.baseClass = baseClass;
     }
 
-    public <C extends Object> C loadAndGoto(String name, Parent owner) {
+    public <C extends Object> C loadAndGoto(String name, final Parent owner) {
         try {
             FXMLLoader fxml = load(name);
             Parent root = fxml.getRoot();
@@ -48,7 +48,8 @@ public class FlowManager {
             stage.showingProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue ov, Boolean t, Boolean t1) {
-                    System.out.println("ウインドウを閉じる" + t1);
+                    System.out.println("ウインドウを閉じる: " + t1);
+                    gotoPage(owner, owner);
                 }
             });
 //            stage.setTitle(name);
@@ -89,9 +90,16 @@ public class FlowManager {
     
     public Stage gotoPage(Parent root, Parent owner) {
         Stage stage = (Stage) owner.getScene().getWindow();
-        Scene scene = new Scene(root);
+        if (stage == null) {
+            stage = new Stage();
+        }
+        Scene scene = root.getScene();
+        if (scene == null) {
+            scene = new Scene(root);
+        }
         stage.setScene(scene);
 //        stage.sizeToScene();
+        stage.show();
         return stage;
     }
 }
