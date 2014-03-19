@@ -38,6 +38,52 @@ public class FlowManager {
         this.baseClass = baseClass;
     }
 
+    public FXMLLoader loadFXML(String name) throws IOException {
+        URL rsrc = null;
+        try {
+            rsrc = baseClass.getResource(name + ".fxml");
+            FXMLLoader fxml = new FXMLLoader(rsrc);
+            fxml.load();
+            fxml.getRoot();
+            fxml.getController();
+            return fxml;
+        } catch (IOException | RuntimeException ex) {
+            throw new IOException("画面をロードできません: " + rsrc, ex);
+        }
+    }
+    
+    public Stage showDialog(Parent root, Parent owner) {
+        Scene scene = root.getScene();
+        if (scene == null) {
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(owner.getScene().getWindow());
+            stage.setScene(new Scene(root));
+            stage.setTitle("URLを開く");
+            stage.show();
+            return stage;
+        } else {
+            Stage stage = (Stage) scene.getWindow();
+            stage.show();
+            return stage;
+        }
+    }
+    
+    public Stage gotoPage(Parent root, Parent owner) {
+        Stage stage = (Stage) owner.getScene().getWindow();
+        if (stage == null) {
+            stage = new Stage();
+        }
+        Scene scene = root.getScene();
+        if (scene == null) {
+            scene = new Scene(root);
+        }
+        stage.setScene(scene);
+//        stage.sizeToScene();
+        stage.show();
+        return stage;
+    }
+
     public <C extends Object> C loadAndGoto(String name, final Parent owner) {
         try {
             FXMLLoader fxml = loadFXML(name);
@@ -55,52 +101,27 @@ public class FlowManager {
             });
 //            stage.setTitle(name);
             return fxml.getController();
-        } catch (IOException ex) {
+        } catch (IOException | RuntimeException ex) {
             throw new RuntimeException("画面遷移できません: " + name, ex);
         }
     }
-
-    public FXMLLoader loadFXML(String name) throws IOException {
-        URL rsrc = null;
+    
+    public <C extends Object> C loadAndPopup(String name, final Parent owner) {
         try {
-            rsrc = baseClass.getResource(name + ".fxml");
-            FXMLLoader fxml = new FXMLLoader(rsrc);
-            fxml.load();
-            fxml.getRoot();
-            fxml.getController();
-            return fxml;
+            FXMLLoader fxml = loadFXML(name);
+            Parent root = fxml.getRoot();
+            Object data = owner.getUserData();
+            root.setUserData(data);
+            Stage stage = showDialog(root, owner);
+            stage.showingProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue ov, Boolean oldValue, Boolean newValue) {
+                    System.out.println("ウインドウを閉じる: " + newValue);
+                }
+            });
+            return fxml.getController();
         } catch (IOException | RuntimeException ex) {
-            throw new IOException("画面をロードできません: " + rsrc, ex);
+            throw new RuntimeException("画面遷移できません: " + name, ex);
         }
-    }
-    
-    public void showDialog(Parent root, Parent owner) {
-        Scene scene = root.getScene();
-        if (scene == null) {
-            Stage stage = new Stage();
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(owner.getScene().getWindow());
-            stage.setScene(new Scene(root));
-            stage.setTitle("URLを開く");
-            stage.show();
-        } else {
-            Stage stage = (Stage) scene.getWindow();
-            stage.show();
-        }
-    }
-    
-    public Stage gotoPage(Parent root, Parent owner) {
-        Stage stage = (Stage) owner.getScene().getWindow();
-        if (stage == null) {
-            stage = new Stage();
-        }
-        Scene scene = root.getScene();
-        if (scene == null) {
-            scene = new Scene(root);
-        }
-        stage.setScene(scene);
-//        stage.sizeToScene();
-        stage.show();
-        return stage;
     }
 }

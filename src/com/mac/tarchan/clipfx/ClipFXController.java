@@ -282,11 +282,18 @@ public class ClipFXController implements Initializable {
     @FXML
     private void onOpenUrl(ActionEvent event) {
         ((Stage)root.getScene().getWindow()).setTitle("画面遷移テスト");
-        URLBoxController c = flow.loadAndGoto("URLBox", root);
+//        URLBoxController c = flow.loadAndGoto("URLBox", root);
+        URLBoxController c = flow.loadAndPopup("URLBox", root);
         c.urlProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> ov, String oldValue, String newValue) {
                 
+            }
+        });
+        c.urlProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String oldValue, String newValue) {
+                setImageURL(newValue);
             }
         });
 //        Scene scene = urlBox.getScene();
