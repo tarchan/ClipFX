@@ -27,6 +27,12 @@ import javafx.stage.Stage;
  */
 public class ClipFX extends Application {
     
+    static {
+//        System.setProperty("java.util.logging.SimpleFormatter.format", "%1$tT %2$s %4$s: %5$s%6$s%n");
+        // LTSVフォーマットに変更
+        System.setProperty("java.util.logging.SimpleFormatter.format", "date:%1$tT\tsource:%2$s\tlevel:%4$s\tmessage:%5$s\tthrown:%6$s%n");
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("ClipFX.fxml"));
@@ -45,7 +51,6 @@ public class ClipFX extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.setProperty("java.util.logging.SimpleFormatter.format", "%1$tT %2$s %4$s: %5$s%6$s%n");
         launch(args);
     }
     
