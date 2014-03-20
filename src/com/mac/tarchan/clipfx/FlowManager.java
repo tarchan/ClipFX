@@ -17,6 +17,8 @@ package com.mac.tarchan.clipfx;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
@@ -31,8 +33,8 @@ import javafx.stage.Stage;
  * @author tarchan
  */
 public class FlowManager {
-    
-    private Class baseClass;
+    private static final Logger log = Logger.getLogger(FlowManager.class.getName());
+    private final Class baseClass;
 
     public FlowManager(Class baseClass) {
         this.baseClass = baseClass;
@@ -59,7 +61,7 @@ public class FlowManager {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(owner.getScene().getWindow());
             stage.setScene(new Scene(root));
-            stage.setTitle("URLを開く");
+//            stage.setTitle("URLを開く");
             stage.show();
             return stage;
         } else {
@@ -90,6 +92,7 @@ public class FlowManager {
             Parent root = fxml.getRoot();
             Object data = owner.getUserData();
             root.setUserData(data);
+            log.log(Level.INFO, "fxml={0}, root={1}@{2}", new Object[]{fxml, root, System.identityHashCode(root)});
             Stage stage = gotoPage(root, owner);
             stage.showingProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
@@ -112,6 +115,7 @@ public class FlowManager {
             Parent root = fxml.getRoot();
             Object data = owner.getUserData();
             root.setUserData(data);
+            log.log(Level.INFO, "fxml={0}, root={1}@{2}", new Object[]{fxml, root, System.identityHashCode(root)});
             Stage stage = showDialog(root, owner);
             stage.showingProperty().addListener(new ChangeListener<Boolean>() {
                 @Override

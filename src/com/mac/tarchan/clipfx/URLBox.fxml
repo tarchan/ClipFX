@@ -12,8 +12,8 @@
     <TextField fx:id="urlField" prefHeight="22.0" prefWidth="469.0" promptText="イメージのURL" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="28.0" />
     <HBox id="HBox" alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
       <children>
-        <Button fx:id="urlCancel" mnemonicParsing="false" onAction="#onUrlCancel" text="キャンセル" />
-        <Button fx:id="urlOpen" mnemonicParsing="false" onAction="#onUrlOpen" text="開く" />
+        <Button fx:id="urlCancel" mnemonicParsing="false" text="キャンセル" />
+        <Button fx:id="urlOpen" mnemonicParsing="false" text="開く" />
       </children>
     </HBox>
   </children>
