@@ -12,57 +12,57 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="root" prefHeight="600.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mac.tarchan.clipfx.ClipFXController">
+<VBox fx:id="root" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mac.tarchan.clipfx.ClipFXController">
   <children>
     <MenuBar useSystemMenuBar="true" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="ファイル">
           <items>
-            <MenuItem id="" mnemonicParsing="false" onAction="#onNewFile" text="クリップボードから新規作成" fx:id="newMenu">
+            <MenuItem id="" fx:id="newMenu" mnemonicParsing="false" onAction="#onNewFile" text="クリップボードから新規作成">
               <accelerator>
                 <KeyCodeCombination alt="UP" code="N" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
               </accelerator>
             </MenuItem>
-            <MenuItem id="" mnemonicParsing="false" onAction="#onOpenFile" text="ファイルを開く…" fx:id="openFileMenu">
+            <MenuItem id="" fx:id="openFileMenu" mnemonicParsing="false" onAction="#onOpenFile" text="ファイルを開く…">
               <accelerator>
                 <KeyCodeCombination alt="UP" code="O" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
               </accelerator>
             </MenuItem>
-            <MenuItem mnemonicParsing="false" onAction="#onOpenUrl" text="URLを開く..." fx:id="openUrlMenu">
+            <MenuItem fx:id="openUrlMenu" mnemonicParsing="false" onAction="#onOpenUrl" text="URLを開く...">
               <accelerator>
                 <KeyCodeCombination alt="UP" code="L" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
               </accelerator>
             </MenuItem>
-            <Menu id="" mnemonicParsing="false" text="最近使った項目を開く" fx:id="recentMenu" />
+            <Menu id="" fx:id="recentMenu" mnemonicParsing="false" text="最近使った項目を開く" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem id="" mnemonicParsing="false" onAction="#onCloseFile" text="ウインドウを閉じる" fx:id="closeMenu">
+            <MenuItem id="" fx:id="closeMenu" mnemonicParsing="false" onAction="#onCloseFile" text="ウインドウを閉じる">
               <accelerator>
                 <KeyCodeCombination alt="UP" code="W" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
               </accelerator>
             </MenuItem>
-            <MenuItem id="" mnemonicParsing="false" onAction="#onSaveFile" text="保存" fx:id="saveMenu">
+            <MenuItem id="" fx:id="saveMenu" mnemonicParsing="false" onAction="#onSaveFile" text="保存">
               <accelerator>
                 <KeyCodeCombination alt="UP" code="S" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
               </accelerator>
             </MenuItem>
-            <MenuItem id="" mnemonicParsing="false" onAction="#onSaveAsFile" text="別名で保存…" fx:id="saveAsMenu">
+            <MenuItem id="" fx:id="saveAsMenu" mnemonicParsing="false" onAction="#onSaveAsFile" text="別名で保存…">
               <accelerator>
                 <KeyCodeCombination alt="UP" code="S" control="UP" meta="DOWN" shift="DOWN" shortcut="UP" />
               </accelerator>
             </MenuItem>
-            <MenuItem id="" mnemonicParsing="false" onAction="#onRevertFile" text="元に戻す" fx:id="revertMenu">
+            <MenuItem id="" fx:id="revertMenu" mnemonicParsing="false" onAction="#onRevertFile" text="元に戻す">
               <accelerator>
                 <KeyCodeCombination alt="UP" code="R" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
               </accelerator>
             </MenuItem>
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem id="" mnemonicParsing="false" onAction="#onShowOption" text="環境設定…" fx:id="optionMenu">
+            <MenuItem id="" fx:id="optionMenu" mnemonicParsing="false" onAction="#onShowOption" text="環境設定…">
               <accelerator>
                 <KeyCodeCombination alt="UP" code="COMMA" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
               </accelerator>
             </MenuItem>
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem id="" mnemonicParsing="false" onAction="#onQuit" text="ClipFX を終了" fx:id="quitMenu">
+            <MenuItem id="" fx:id="quitMenu" mnemonicParsing="false" onAction="#onQuit" text="ClipFX を終了">
               <accelerator>
                 <KeyCodeCombination alt="UP" code="Q" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
               </accelerator>
@@ -93,12 +93,12 @@
         </Menu>
         <Menu mnemonicParsing="false" text="表示">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#onTrimView" text="トリミング" fx:id="trimMenu">
+            <MenuItem fx:id="trimMenu" mnemonicParsing="false" onAction="#onTrimView" text="トリミング">
               <accelerator>
                 <KeyCodeCombination alt="UP" code="DIGIT1" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
               </accelerator>
             </MenuItem>
-            <MenuItem mnemonicParsing="false" onAction="#onRotateView" text="回転" fx:id="rotateMenu">
+            <MenuItem fx:id="rotateMenu" mnemonicParsing="false" onAction="#onRotateView" text="回転">
               <accelerator>
                 <KeyCodeCombination alt="UP" code="DIGIT2" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
               </accelerator>
@@ -107,18 +107,18 @@
         </Menu>
         <Menu mnemonicParsing="false" text="ヘルプ">
           <items>
-            <MenuItem id="" mnemonicParsing="false" onAction="#onAbout" text="ClipFX について" fx:id="aboutMenu" />
+            <MenuItem id="" fx:id="aboutMenu" mnemonicParsing="false" onAction="#onAbout" text="ClipFX について" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
-    <SplitPane dividerPositions="0.17278797996661102" focusTraversable="true" prefHeight="160.0" prefWidth="200.0" visible="true" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.5" focusTraversable="true" prefHeight="160.0" prefWidth="300.0" visible="true" VBox.vgrow="ALWAYS">
       <items>
         <Accordion maxWidth="-Infinity" prefWidth="200.0">
-          <expandedPane>
+          <panes>
             <TitledPane fx:id="trimPanel" animated="false" collapsible="true" graphicTextGap="4.0" text="トリミング">
               <content>
-                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="300.0">
                   <children>
                     <VBox prefHeight="526.0" prefWidth="201.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
@@ -143,9 +143,6 @@
                 </AnchorPane>
               </content>
             </TitledPane>
-          </expandedPane>
-          <panes>
-            <fx:reference source="trimPanel" />
             <TitledPane id="x1" fx:id="rotatePanel" animated="false" text="回転">
               <content>
                 <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
